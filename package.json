@@ -1,0 +1,10 @@
+{
+  "name": "krishimitra-smart-farmer-alerts",
+  "version": "2.0.0",
+  "private": true,
+  "description": "KrishiMitra with 7-day weather, automatic SMS alerts, sowing reminders and historical mandi prices",
+  "main": "server/index.js",
+  "scripts": {"start": "node server/index.js", "dev": "node --watch server/index.js"},
+  "engines": {"node": ">=18"},
+  "dependencies": {"cors": "^2.8.5", "dotenv": "^16.4.5", "express": "^4.21.2", "node-cron": "^3.0.3", "twilio": "^5.4.0"}
+}

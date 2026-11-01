@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173d2b">
+<title>KrishiMitra — Smart Farming, Stronger Futures</title>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-icon">🌱</span><span>Krishi<span class="brand-light">Mitra</span><small>SMART AGRICULTURE</small></span></a>
+  <nav><a href="#dashboard" data-i18n="navHome">Home</a><a href="#advisory" data-i18n="navAdvice">Crop advice</a><a href="#market" data-i18n="navMarket">Market prices</a><a href="#history" data-i18n="navHistory">My history</a></nav>
+  <div class="top-actions"><select id="language" aria-label="Choose language"><option value="en">English</option><option value="hi">हिन्दी</option><option value="pa">ਪੰਜਾਬੀ</option></select><button class="outline-btn" id="profileBtn">Farmer login</button></div>
+</header>
+<main>
+<section class="hero">
+ <div class="hero-content">
+  <div class="eyebrow"><span class="pulse"></span><span data-i18n="eyebrow">YOUR FARM. YOUR FUTURE.</span></div>
+  <h1 data-i18n="heroTitle">Grow smarter.<br><em>Harvest better.</em></h1>
+  <p data-i18n="heroText">Local crop guidance, market prices and weather updates — made simple for every farmer, in your language.</p>
+  <div class="hero-buttons"><a class="primary-btn" href="#advisory" data-i18n="getAdvice">Get crop advice <span>↗</span></a><a class="text-btn" href="#market" data-i18n="checkPrices">Check market prices ↓</a></div>
+  <div class="hero-proof"><span>✓ <span data-i18n="localLang">Hindi · English · Punjabi</span></span><span>✓ <span data-i18n="farmerFirst">Built for farmers</span></span></div>
+ </div>
+ <div class="hero-visual" aria-label="Illustration of green farm fields">
+  <div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div>
+  <div class="field-lines"></div><div class="farm-label"><span class="label-icon">🌾</span><div><b data-i18n="fieldReady">Your farm, at a glance</b><small data-i18n="fieldSub">Practical guidance, all in one place</small></div><span class="arrow">↗</span></div>
+  <div class="floating-chip chip-weather">☀️ <span><b>Weather</b><small>Plan your irrigation</small></span></div>
+  <div class="floating-chip chip-crop">🌿 <span><b>Crop health</b><small>Photo-based check</small></span></div>
+ </div>
+</section>
+<section class="trust-strip"><div><strong>01</strong><span data-i18n="strip1">Know your crop</span></div><div><strong>02</strong><span data-i18n="strip2">Compare nearby markets</span></div><div><strong>03</strong><span data-i18n="strip3">Plan the next 10 days</span></div><div><strong>04</strong><span data-i18n="strip4">Your language, your choice</span></div></section>
+<section class="section" id="dashboard">
+ <div class="section-heading"><div><span class="kicker" data-i18n="overview">FARMER DASHBOARD</span><h2 data-i18n="goodDay">Good day, farmer <span>👋</span></h2><p data-i18n="dashboardSub">Sign in with your mobile number to save your farm details and search history on this device.</p></div><div class="demo-pill"><span></span><span data-i18n="demoMode">Interactive demo</span></div></div>
+ <div class="dashboard-grid">
+  <article class="panel farmer-panel"><div class="panel-title"><span class="panel-icon">👨‍🌾</span><div><h3 data-i18n="farmerProfile">Farmer profile</h3><p data-i18n="profileSub">Your personal farm space</p></div></div>
+   <form id="farmerForm"><label for="farmerName" data-i18n="fullName">Full name</label><input id="farmerName" placeholder="e.g. Gurpreet Singh" autocomplete="name"><label for="mobile" data-i18n="mobileNumber">Mobile number</label><input id="mobile" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" required>
+   <button class="outline-btn otp-send" type="button" id="sendOtpBtn">Send OTP</button>
+   <div id="signupOtpBox" class="otp-box hidden"><label for="signupOtp">Enter OTP</label><div class="otp-row"><input id="signupOtp" inputmode="numeric" maxlength="6" placeholder="6-digit OTP"><button class="outline-btn" type="button" id="verifySignupOtpBtn">Verify OTP</button></div><p id="signupOtpStatus" class="otp-status" aria-live="polite"></p></div><label for="state" data-i18n="state">State</label><select id="state"><option>Punjab</option><option>Haryana</option><option>Uttar Pradesh</option><option>Rajasthan</option><option>Other</option></select><label for="farmLocation">Village / District / City (for local weather)</label><input id="farmLocation" placeholder="e.g. Samrala, Ludhiana, Punjab"><label for="crop" data-i18n="mainCrop">Main crop</label><select id="crop"><option>Wheat</option><option>Rice / Paddy</option><option>Maize</option><option>Cotton</option><option>Mustard</option><option>Vegetables</option></select><label class="consent-row"><input id="smsConsent" type="checkbox"> I agree to receive weather and crop-season SMS alerts on this number.</label>
+   <div class="already-register"><span>Already registered?</span> <button type="button" id="showLoginBtn" class="inline-link">Login here</button></div><button class="primary-btn full" type="submit" data-i18n="saveProfile">Save farmer profile</button></form>
+   <div class="profile-result hidden" id="profileResult"></div>
+   <article id="loginPanel" class="login-panel hidden"><h3>Already registered farmer</h3><label for="loginName">Name</label><input id="loginName" placeholder="Enter registered name"><label for="loginMobile">Mobile number</label><input id="loginMobile" type="tel" inputmode="numeric" maxlength="10" placeholder="Registered 10-digit mobile number"><button class="outline-btn otp-send" type="button" id="sendLoginOtpBtn">Send OTP</button><div id="loginOtpBox" class="otp-box hidden"><label for="loginOtp">Enter OTP</label><div class="otp-row"><input id="loginOtp" inputmode="numeric" maxlength="6" placeholder="6-digit OTP"><button class="outline-btn" type="button" id="verifyLoginOtpBtn">Verify &amp; login</button></div><p id="loginOtpStatus" class="otp-status" aria-live="polite"></p></div><div id="loginResult" class="profile-result hidden"></div></article><p class="privacy-note" data-i18n="privacy">Demo: details are saved only in this browser. No OTP or real identity verification is connected.</p>
+  </article>
+  <article class="panel weather-panel"><div class="panel-title"><span class="panel-icon">🌤️</span><div><h3 data-i18n="weatherTitle">Weather snapshot</h3><p data-i18n="weatherSub">Local conditions help plan farm work</p></div><span class="demo-tag" data-i18n="sample">SAMPLE</span></div>
+   <div id="weatherLocation" class="weather-location">Save your village/district and farmer profile to load local forecast.</div><div id="sevenDayWeather" class="seven-day-weather"><p class="history-empty">7-day forecast will appear here after you save your profile.</p></div>
+   <div class="notice">ℹ️ Forecast supplied by Open-Meteo. Rain probability is a forecast, not a guarantee.</div>
+  </article>
+ </div>
+</section>
+<section class="section sowing-section" id="sowing"><div class="section-heading"><div><span class="kicker">SEASONAL FARM REMINDERS</span><h2>Crop sowing calendar</h2><p>Get an SMS when the selected crop's indicative sowing window begins. Confirm dates with your local KVK/PAU.</p></div></div><div class="panel"><div id="sowingInfo">Save your farmer profile and selected crop to view its seasonal reminder window.</div></div></section>
+<section class="section advice-section" id="advisory">
+ <div class="section-heading"><div><span class="kicker" data-i18n="smartTools">SMART FARMING TOOLS</span><h2 data-i18n="adviceTitle">Advice for your field</h2><p data-i18n="adviceSub">Upload a clear leaf photo to start a demo crop-health check and create a 10-day action plan.</p></div></div>
+ <div class="advice-grid">
+  <article class="panel upload-panel"><div class="panel-title"><span class="panel-icon">📷</span><div><h3 data-i18n="leafCheck">Leaf photo check</h3><p data-i18n="leafSub">Photo upload · demo analysis</p></div></div>
+   <label class="upload-zone" for="leafPhoto" id="uploadZone"><span class="upload-symbol">＋</span><b data-i18n="uploadTitle">Upload a leaf photo</b><small data-i18n="uploadSub">JPG or PNG · use a clear photo in daylight</small><img id="leafPreview" class="leaf-preview hidden" alt="Selected leaf preview"><span class="choose-file" data-i18n="chooseFile">Choose photo</span></label><input id="leafPhoto" type="file" accept="image/*" hidden>
+   <label for="symptoms" data-i18n="symptoms">What do you notice? (optional)</label><select id="symptoms"><option value="unknown" data-i18n="symptomUnknown">Not sure</option><option value="yellow" data-i18n="symptomYellow">Yellowing leaves</option><option value="spots" data-i18n="symptomSpots">Brown / black spots</option><option value="curl" data-i18n="symptomCurl">Curled leaves</option><option value="insects" data-i18n="symptomInsects">Visible insects</option></select>
+   <button class="primary-btn full" id="analyzeBtn" data-i18n="analyze">Create demo crop plan <span>↗</span></button>
+   <div id="leafDiagnosis" class="leaf-diagnosis hidden" aria-live="polite"></div><p class="small-note" data-i18n="photoNotice">This prototype does not diagnose a disease from pixels. Confirm symptoms with a local agriculture officer before treatment.</p>
+  </article>
+  <article class="panel plan-panel"><div class="panel-title"><span class="panel-icon">🗓️</span><div><h3 data-i18n="tenDay">Your next 10 days</h3><p data-i18n="planSub">A starting checklist, not a live agronomy prescription</p></div></div>
+   <div id="planOutput" class="plan-output"><div class="empty-plan"><span>🌱</span><b data-i18n="planEmpty">Your field plan will appear here</b><small data-i18n="planEmptySub">Upload a photo and select the symptoms you see.</small></div></div>
+  </article>
+ </div>
+</section>
+<section class="section market-section" id="market">
+ <div class="section-heading"><div><span class="kicker" data-i18n="marketKicker">SELL WITH CONFIDENCE</span><h2 data-i18n="marketTitle">Know your mandi prices</h2><p data-i18n="marketSub">Compare indicative prices before you decide where to sell.</p></div><span class="demo-tag" data-i18n="illustrative">ILLUSTRATIVE DATA</span></div>
+ <div class="panel market-panel"><div class="market-controls"><label><span data-i18n="selectCrop">Crop</span><select id="marketCrop"><option>Wheat</option><option>Rice / Paddy</option><option>Maize</option><option>Cotton</option><option>Mustard</option></select></label><label><span data-i18n="selectState">State</span><select id="marketState"><option>Punjab</option><option>Haryana</option><option>Uttar Pradesh</option><option>Rajasthan</option></select></label><button class="outline-btn" id="searchPrices" data-i18n="compare">Compare prices</button></div>
+  <div class="price-cards" id="priceCards"><article class="price-card"><small>Khanna Mandi</small><b>₹2,425<span>/quintal</span></b><em>Illustrative price</em></article><article class="price-card featured-price"><small>Ludhiana Mandi</small><b>₹2,450<span>/quintal</span></b><em>Illustrative price</em></article><article class="price-card"><small>Patiala Mandi</small><b>₹2,410<span>/quintal</span></b><em>Illustrative price</em></article></div>
+  <div class="notice">ℹ️ Historical prices are fetched from Agmarknet/data.gov.in when an API key is configured. No illustrative values are presented as actual market prices.</div><div class="historical-box"><h3>Last 12 months: top 3 recorded varieties</h3><p>Ranked by average recorded modal price for the selected crop and state.</p><button class="outline-btn" id="loadHistorical">Load last-year variety prices</button><div id="historicalResults" class="historical-results">Historical records will appear here when the data.gov.in API key is configured.</div></div>
+ </div>
+</section>
+<section class="section history-section" id="history">
+ <div class="section-heading"><div><span class="kicker" data-i18n="historyKicker">YOUR ACTIVITY</span><h2 data-i18n="historyTitle">Search history</h2><p data-i18n="historySub">Your recent checks are saved locally on this device after you create a farmer profile.</p></div><button class="outline-btn" id="clearHistory" data-i18n="clearHistory">Clear history</button></div>
+ <div class="panel history-panel"><div id="historyList"><div class="history-empty" data-i18n="historyEmpty">No searches yet. Try a crop plan or mandi price comparison.</div></div></div>
+</section>
+<section class="cta-band"><div><span class="kicker" data-i18n="ctaKicker">CULTIVATE A SUSTAINABLE TOMORROW</span><h2 data-i18n="ctaTitle">Better information.<br>Stronger harvests.</h2><p data-i18n="ctaText">Built around small landholders, local languages and practical decisions.</p></div><a class="primary-btn" href="#dashboard" data-i18n="createProfile">Create your farmer profile ↗</a></section>
+</main>
+<footer><a class="brand footer-brand" href="#"><span class="brand-icon">🌱</span><span>Krishi<span class="brand-light">Mitra</span><small>SMART AGRICULTURE</small></span></a><p data-i18n="footerText">A hackathon prototype for accessible, climate-smart farming.</p><small>© 2026 KrishiMitra · <span data-i18n="prototype">Prototype — verify all agronomy and market information</span></small></footer>
+<div class="toast" id="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
